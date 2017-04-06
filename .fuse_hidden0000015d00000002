@@ -4,7 +4,7 @@ cd /
  
 mkdir grubSplashImages
 cd grubSplashImages
-wget -O default-URL-list.txt https://raw.githubusercontent.com/MaximumEndurance/grub-random/master/default-URL-list 
+wget -O default-URL-list.txt https://github.com/MaximumEndurance/grub-random/blob/master/default-URL-list 
 wget -i default-URL-list.txt
 file="/etc/default/grub"
 
@@ -27,5 +27,5 @@ sed -i 's/sudo update-grub//' $file2  # removing redundant entires
 sudo echo "sudo update-grub" >> /etc/rc.local
 
 sudo update-grub	# update entries in grub for the first time
-
 sudo rm /grubSplashImages/default-URL-list.txt
+echo -e "Successfully Configured Changes\n\n"
