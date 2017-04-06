@@ -1,0 +1,15 @@
+#!/bin/bash
+
+cd
+ 
+#mkdir grubSplashImages
+
+#sed -i 's/.*export.*//' /etc/default/grub
+command1="grubImage=\"ls /home/aryan/grubSplashImages | sort -R | tail -$N | head -1\" \n
+export GRUB_MENU_PICTURE=\"/home/aryan/grubSplashImages/\$grubImage\"  "
+
+## entering commands into /etc/default/grub
+
+echo -e $commands >> /etc/default/grub
+
+sudo update-grub
