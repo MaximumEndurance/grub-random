@@ -6,6 +6,15 @@ mkdir grubSplashImages
 cd grubSplashImages
 wget -O default-URL-list.txt https://raw.githubusercontent.com/MaximumEndurance/grub-random/master/default-URL-list 
 wget -i default-URL-list.txt
+
+## replacing the ?raw=true tag from each file. It is possibly causing errors with grub-bootloader 
+
+for everyfile in /grubSplashImages/
+do
+required_name=`sed '/s/.*?$everyfile//'
+mv $required_name $everyfile
+done
+
 file="/etc/default/grub"
 
 current_user=$USER
@@ -29,3 +38,5 @@ sudo echo "sudo update-grub" >> /etc/rc.local
 sudo update-grub	# update entries in grub for the first time
 
 sudo rm /grubSplashImages/default-URL-list.txt
+
+echo "Successfully Established grub-random"
