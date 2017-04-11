@@ -2,32 +2,30 @@
 
 cd
 
- 
 mkdir grubSplashImages
 cd grubSplashImages
+
 wget -O default-URL-list.txt https://raw.githubusercontent.com/MaximumEndurance/grub-random/master/default-URL-list.txt
 wget -i default-URL-list.txt
 
 ## replacing the ?raw=true tag from each file. It is possibly causing errors with grub-bootloader 
 
-for everyfile in grubSplashImages/
-do
-required_name=`sed '/s/.*?$everyfile//'`
-mv $required_name $everyfile
-done
+#for everyfile in $PWD
+#do
+#required_name=`sed 's/.*?$everyfile//'`
+#mv $required_name $everyfile
+#done
 
 file="/etc/default/grub"
 
-
 sudo sed -i 's/.*export.*//' $file
 sudo sed -i 's/.*grubImage.*//' $file ## safety precaution. If the user runs the script multiple times it would create multiple entries in /etc/default/grub file
-command="grubImage=\`ls grubSplashImages | sort -R | tail -\$N | head -1\` \n
-export GRUB_MENU_PICTURE=\"grubSplashImages/\$grubImage\"  "
+command="grubImage=\`ls \$PWD/\$grubImage | sort -R | tail -\$N | head -1\` \n
+export GRUB_BACKGROUND=\"\$PWD/\$grubImage\" \necho \$GRUB_BACKGROUND"
 
 ## entering commands into /etc/default/grub
 
 sudo echo -e $command >> $file
-
 
 ## Making changes permanent
 ## So update-grub runs everytime on bootup and a new random image is selected
@@ -36,7 +34,7 @@ sed -i 's/sudo update-grub//' $file2  # removing redundant entires
 sudo echo "sudo update-grub" >> /etc/rc.local
 
 sudo update-grub	# update entries in grub for the first time
-pwd
-sudo rm grubSplashImages/default-URL-list.txt
+
+sudo rm default-URL-list.txt
 
 echo "Successfully Established grub-random"
