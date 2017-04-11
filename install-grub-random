@@ -7,6 +7,7 @@ cd grubSplashImages
 
 wget -O default-URL-list.txt https://raw.githubusercontent.com/MaximumEndurance/grub-random/master/default-URL-list.txt
 wget -i default-URL-list.txt
+sudo rm default-URL-list.txt #Note has to be above update-grub. Caused a error on 10-Apr-17
 sudo chmod 777 ../grubSplashImages/*	# replacing read write execute permissions for grubSplashImages directory
 sudo chmod 777 ../grubSplashImages
 
@@ -26,19 +27,18 @@ command="grubImage=\`ls \$PWD/\$grubImage | sort -R | tail -\$N | head -1\` \n
 export GRUB_BACKGROUND=\"\$PWD/\$grubImage\" "
 
 
-
 sudo echo -e $command >> $file
 
 ## Making changes permanent
 ## So update-grub runs everytime on bootup and a new random image is selected
 file2="/etc/rc.local"
 sed -i 's/sudo update-grub//' $file2  # removing redundant entires
-sudo echo "sudo update-grub" >> /etc/rc.local
 
-sudo rm default-URL-list.txt #Note has to be above update-grub. Caused a error on 10-Apr-17
+ ## entering commands into /etc/default/grub
+
+sudo echo "sudo update-grub" >> /etc/rc.local
 
 sudo update-grub	# update entries in grub for the first time
 
 
-
-echo "Successfully Established grub-random" ## entering commands into /etc/default/grub
+echo "Successfully Established grub-random"
