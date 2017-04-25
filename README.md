@@ -1,18 +1,21 @@
-## This script provides for randomly changing wallpapers in the grub background.
+## Provide for randomly changing wallpapers in the grub background.
 
-The aim is to generate a Linux implementation of changing log-in backgrounds in Windows.
+The crazy aim is to generate a Linux implementation of changing log-in backgrounds in Windows.
 
-###Installation
+### Installation
 
-Note that an active internet connection is required to download images
+**Note** : An active internet connection is required to download background images.
 
-Download the file install-grub-random
-and then in a terminal enter :
+1. Download the file install-grub-random
+2. Then in a terminal enter :
 
-chmod 777 install-grub-random
-sudo ./install-grub-random 
+    ```
+    chmod 777 install-grub-random
+    sudo ./install-grub-random 
+    ```
+    
 
 
-Note: You can change the images to be shown during boot by adding/removing images in the ~/grubSplashImages directory.
+Tip: You can change the images to be shown during boot by adding/removing images in the ~/grubSplashImages directory.
 
 Godspeed.
