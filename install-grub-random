@@ -11,7 +11,7 @@ sudo rm default-URL-list.txt #Note has to be above update-grub. Caused a error o
 sudo chmod 777 ../grubSplashImages/*	# replacing read write execute permissions for grubSplashImages directory
 sudo chmod 777 ../grubSplashImages
 
-## replacing the ?raw=true tag from each file. It is possibly causing errors with grub-bootloader. Happens to be important
+## replacing the ?raw=true tag from each file. It is possibly causing errors with grub-bootloader, sice all files extension must end with .jpg, .pn, etc.  formats
 
 for file in $PWD/*
 do
