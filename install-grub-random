@@ -2,7 +2,7 @@
 
 cd
 
-mkdir grubSplashImages
+#mkdir grubSplashImages
 cd grubSplashImages
 
 #wget -O default-URL-list.txt https://raw.githubusercontent.com/MaximumEndurance/grub-random/master/default-URL-list.txt
@@ -13,11 +13,11 @@ cd grubSplashImages
 
 ## replacing the ?raw=true tag from each file. It is possibly causing errors with grub-bootloader, sice all files extension must end with .jpg, .pn, etc.  formats
 
-for file in $PWD/*
-do
-new_name=${file%?raw=true*}
-mv $file $new_name
-done
+##for file in $PWD/*
+#do
+#new_name=${file%?raw=true*}
+#mv $file $new_name
+#done
 
 file="/etc/default/grub"
 
@@ -33,10 +33,13 @@ sudo echo -e $command >> $file
 ## So update-grub runs everytime on bootup and a new random image is selected
 file2="/etc/rc.local"
 sed -i 's/sudo update-grub//' $file2  # removing redundant entires
+sed -i 's/exit 0//' $file2
 
  ## entering commands into /etc/default/grub
 
 sudo echo "sudo update-grub" >> /etc/rc.local
+
+echo 'exit 0' >> /etc/rc.local 
 
 sudo update-grub	# update entries in grub for the first time
 
